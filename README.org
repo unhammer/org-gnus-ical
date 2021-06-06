@@ -1,0 +1,23 @@
+#+TITLE: org-gnus-ical
+
+Capture iCalendar invites from Gnus to Org.
+
+* Usage
+
+Put the bundled =ical2org= script somewhere in =PATH=, then
+
+#+BEGIN_SRC emacs-lisp
+  (use-package org-gnus-ical
+    :load-path "~/src/org-gnus-ical"
+    :demand t ; so that it's loaded after gnus even though we use :bind
+    :after gnus
+    :config
+    (add-to-list 'org-capture-templates
+                '("c" "iCalendar invite" entry
+                  (file+olp "~/org/work.org"
+                            "Meetings")
+                  (function org-gnus-ical-capture-template))))
+#+END_SRC
+
+The above will give you a capture template on key =c= that turns
+iCalendar invites into org-mode headings.
